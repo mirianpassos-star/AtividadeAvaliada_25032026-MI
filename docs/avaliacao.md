@@ -1,9 +1,9 @@
 # Avaliação — Engenharia de Software
 ## Sistema Integrado de Gestão de Farmácia — MVP Definido pelo Estudante
 
-**Aluno:** Preencha aqui  
-**RA:** Preencha aqui  
-**Data:** Preencha aqui
+**Aluno:** Mirian Suelen Passos 
+**RA:** 25000699  
+**Data:** 25/03/2026
 
 ---
 
@@ -142,66 +142,212 @@ O sistema deve estar disponível para uso durante todo o horário de funcionamen
 
 ## 6. Documentação dos Casos de Uso
 
-### UC01 — Cadastrar Cliente
+
+
+# Documentação dos Casos de Uso - MVP Sistema Saúde & Vida
+
+## UC01 — Cadastrar Cliente
 **Ator(es):** Atendente  
-**Descrição:** Permite ao atendente cadastrar um novo cliente para associar futuras vendas.  
-**Pré-condições:** O atendente deve estar logado no sistema.  
-**Pós-condições:** Cliente cadastrado com sucesso no banco de dados.  
+**Descrição:** Permite cadastrar um novo cliente, adicionando informações básicas para vincular compras futuras.  
+**Pré-condições:** Atendente deve estar logado no sistema.  
+**Pós-condições:** Cliente cadastrado no banco de dados.
 
-**Fluxo Principal:**  
+### Fluxo Principal
 1. Atendente seleciona “Cadastrar Cliente”.  
-2. Sistema solicita informações básicas (nome, telefone, CPF).  
+2. Sistema solicita dados do cliente (nome, CPF, telefone, endereço).  
 3. Atendente preenche e confirma.  
-4. Sistema salva os dados e confirma o cadastro.  
+4. Sistema salva o cliente e confirma o cadastro.
 
-**Fluxos Alternativos / Exceções:**  
-- FA01 — Cliente já existe: Sistema alerta e sugere atualizar cadastro.  
+### Fluxos Alternativos / Exceções
+- **FA01 — Cliente já cadastrado:** Sistema alerta e oferece atualizar cadastro.
 
-**Relacionamentos:**  
-- Incluir: Nenhum  
-- Estender: Nenhum  
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
 
 ---
 
-### UC05 — Registrar Venda
-**Ator(es):** Atendente  
-**Descrição:** Permite registrar a venda de produtos a um cliente, atualizando estoque e emitindo comprovante.  
-**Pré-condições:** Cliente deve estar cadastrado; produtos devem existir no estoque.  
-**Pós-condições:** Venda registrada, estoque atualizado, comprovante emitido.  
+## UC02 — Consultar Cliente
+**Ator(es):** Atendente, Cliente  
+**Descrição:** Permite buscar clientes cadastrados para vincular vendas ou visualizar informações.  
+**Pré-condições:** Cliente deve estar cadastrado.  
+**Pós-condições:** Informações do cliente exibidas.
 
-**Fluxo Principal:**  
+### Fluxo Principal
+1. Atendente seleciona “Consultar Cliente”.  
+2. Sistema solicita critério de busca (nome, CPF).  
+3. Atendente insere dados e confirma.  
+4. Sistema exibe os resultados.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Cliente não encontrado:** Sistema exibe mensagem “Cliente não encontrado”.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Consultar Histórico de Compras do Cliente (UC10)
+
+---
+
+## UC03 — Cadastrar Produto
+**Ator(es):** Atendente  
+**Descrição:** Permite cadastrar produtos na farmácia, incluindo informações de estoque e preço.  
+**Pré-condições:** Atendente logado com permissão de gerente.  
+**Pós-condições:** Produto cadastrado no sistema.
+
+### Fluxo Principal
+1. Atendente seleciona “Cadastrar Produto”.  
+2. Sistema solicita dados (nome, código de barras, preço, fabricante, unidade).  
+3. Atendente preenche e confirma.  
+4. Sistema salva o produto e confirma.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Produto já cadastrado:** Sistema alerta e oferece atualizar dados.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
+
+---
+
+## UC04 — Consultar Produto
+**Ator(es):** Atendente  
+**Descrição:** Permite localizar produtos para venda ou verificação de estoque.  
+**Pré-condições:** Produto cadastrado no sistema.  
+**Pós-condições:** Informações do produto exibidas.
+
+### Fluxo Principal
+1. Atendente seleciona “Consultar Produto”.  
+2. Sistema solicita critério de busca (nome, código, fabricante).  
+3. Atendente insere dados e confirma.  
+4. Sistema exibe os produtos encontrados.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Produto não encontrado:** Sistema alerta que produto não existe.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
+
+---
+
+## UC05 — Registrar Venda
+**Ator(es):** Atendente  
+**Descrição:** Permite registrar vendas de produtos a um cliente, atualizando estoque e emitindo comprovante.  
+**Pré-condições:** Cliente cadastrado; produtos disponíveis em estoque.  
+**Pós-condições:** Venda registrada, estoque atualizado, comprovante emitido.
+
+### Fluxo Principal
 1. Atendente seleciona “Registrar Venda”.  
 2. Sistema solicita identificação do cliente.  
 3. Atendente adiciona produtos à venda.  
 4. Sistema verifica estoque (<<include>> Atualizar Estoque).  
 5. Sistema calcula total e confirma venda.  
-6. Sistema emite comprovante (<<include>> Emitir Comprovante de Venda).  
+6. Sistema emite comprovante (<<include>> Emitir Comprovante de Venda).
 
-**Fluxos Alternativos / Exceções:**  
-- FA01 — Produto sem estoque: Sistema alerta e impede inclusão do produto.  
-- FA02 — Venda a prazo: Sistema direciona para <<extend>> Registrar Venda a Prazo.  
+### Fluxos Alternativos / Exceções
+- **FA01 — Produto sem estoque:** Sistema alerta e impede inclusão do produto.  
+- **FA02 — Venda a prazo:** Sistema direciona para Registrar Venda a Prazo (<<extend>>).
 
-**Relacionamentos:**  
-- Incluir: Atualizar Estoque, Emitir Comprovante de Venda  
-- Estender: Registrar Venda a Prazo  
+### Relacionamentos
+- **Incluir:** Atualizar Estoque (UC7), Emitir Comprovante de Venda (UC8)  
+- **Estender:** Registrar Venda a Prazo (UC6)
 
 ---
 
-### UC06 — Registrar Venda a Prazo
+## UC06 — Registrar Venda a Prazo
 **Ator(es):** Atendente / Financeiro  
-**Descrição:** Registra vendas a prazo e gera automaticamente a conta a receber.  
-**Pré-condições:** Venda deve ser iniciada; cliente cadastrado.  
-**Pós-condições:** Conta a receber criada com status “Aberta”.  
+**Descrição:** Registra vendas a prazo, gerando contas a receber automáticas.  
+**Pré-condições:** Venda iniciada; cliente cadastrado.  
+**Pós-condições:** Conta a receber criada; venda registrada.
 
-**Fluxo Principal:**  
+### Fluxo Principal
 1. Atendente indica que a venda será a prazo.  
 2. Sistema solicita vencimento e confirma dados do cliente.  
 3. Sistema gera conta a receber (<<include>> Gerar Conta a Receber).  
-4. Venda registrada com vínculo a prazo.  
+4. Sistema confirma venda a prazo.
 
-**Fluxos Alternativos / Exceções:**  
-- FA01 — Cliente sem cadastro: Sistema solicita cadastro antes de continuar.  
+### Fluxos Alternativos / Exceções
+- **FA01 — Cliente não cadastrado:** Sistema solicita cadastro antes de prosseguir.
 
-**Relacionamentos:**  
-- Incluir: Gerar Conta a Receber  
-- Estender: Registro iniciado por “Registrar Venda”  
+### Relacionamentos
+- **Incluir:** Gerar Conta a Receber (UC9)  
+- **Estender:** Registro iniciado por Registrar Venda (UC5)
+
+---
+
+## UC07 — Atualizar Estoque
+**Ator(es):** Sistema  
+**Descrição:** Atualiza estoque automaticamente após venda ou devolução.  
+**Pré-condições:** Venda ou devolução registrada.  
+**Pós-condições:** Estoque refletindo a operação realizada.
+
+### Fluxo Principal
+1. Sistema recebe notificação de venda ou devolução.  
+2. Sistema ajusta a quantidade disponível do produto.  
+3. Sistema alerta se estoque estiver abaixo do mínimo.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Estoque insuficiente:** Sistema impede finalização da venda.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
+
+---
+
+## UC08 — Emitir Comprovante de Venda
+**Ator(es):** Sistema  
+**Descrição:** Gera comprovante detalhado da venda para o cliente.  
+**Pré-condições:** Venda registrada.  
+**Pós-condições:** Comprovante emitido e registrado.
+
+### Fluxo Principal
+1. Sistema gera comprovante com cliente, produtos, quantidade e valor.  
+2. Atendente entrega comprovante ao cliente.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Falha na impressora:** Sistema oferece salvar em PDF.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
+
+---
+
+## UC09 — Gerar Conta a Receber
+**Ator(es):** Sistema / Financeiro  
+**Descrição:** Cria registro de contas a receber para vendas a prazo.  
+**Pré-condições:** Venda a prazo iniciada.  
+**Pós-condições:** Conta a receber registrada com status “Aberta”.
+
+### Fluxo Principal
+1. Sistema cria conta com valor, vencimento e cliente.  
+2. Sistema registra status inicial como “Aberta”.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Dados incompletos do cliente:** Sistema solicita preenchimento antes de criar conta.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Nenhum
+
+---
+
+## UC10 — Consultar Histórico de Compras do Cliente
+**Ator(es):** Atendente / Cliente  
+**Descrição:** Permite visualizar todas as compras realizadas por um cliente.  
+**Pré-condições:** Cliente cadastrado.  
+**Pós-condições:** Histórico exibido.
+
+### Fluxo Principal
+1. Atendente ou cliente seleciona “Histórico de Compras”.  
+2. Sistema solicita identificação do cliente.  
+3. Sistema exibe lista de todas as compras com detalhes.
+
+### Fluxos Alternativos / Exceções
+- **FA01 — Cliente sem compras:** Sistema informa que não há histórico disponível.
+
+### Relacionamentos
+- **Incluir:** Nenhum  
+- **Estender:** Consultar Cliente (UC2)
+  <img width="2392" height="694" alt="image" src="https://github.com/user-attachments/assets/c95bdb37-9857-4a5a-9e17-c4cb75935d58" />
