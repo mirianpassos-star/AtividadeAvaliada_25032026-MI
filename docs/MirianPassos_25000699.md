@@ -1,5 +1,5 @@
 # Avaliação — Engenharia de Software
-## Sistema Integrado de Gestão de Farmácia — MVP Definido pelo Estudante
+## Sistema Integrado de Gestão de Farmácia — SGF
 
 **Aluno:** Mirian Suelen Passos  
 **RA:** 25000699  
@@ -8,70 +8,87 @@
 ---
 
 ## 1. Definição do MVP
-Este MVP foca no **fluxo crítico de vendas e controle de estoque**. O objetivo é permitir que a farmácia opere o balcão, gerencie clientes e controle vendas a prazo de forma confiável.
+Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a operação básica do balcão e a saúde financeira da empresa.
 
-* **Dentro do MVP:** Cadastro de clientes/produtos, registro de vendas (à vista/prazo), baixa automática de estoque, emissão de comprovante e consulta de histórico.
-* **Fora do MVP:** Compras de fornecedores, contas a pagar, relatórios de BI e gestão de múltiplas filiais.
-* **Justificativa:** Priorizou-se a saúde financeira imediata (vendas e recebíveis) e a integridade do inventário.
-
+---
 
 ## 2. Regras de Negócio 
-
-**RN01 — Saldo Positivo:** Bloqueia venda se o estoque estiver zerado.  
-**RN02 — Venda Nominal:** Venda a prazo exige cliente com cadastro ativo.  
-**RN03 — Baixa Automática:** Venda confirmada gera decremento imediato no estoque.  
-**RN04 — Registro de Débito:** Vendas a prazo criam automaticamente um título no financeiro.  
-**RN05 — Recibo Obrigatório:** Toda transação gera um comprovante detalhado.
-
----
-
-## 3. Requisitos Funcionais 
-**RF01** - Cadastrar Cliente | **RF02** - Consultar Cliente | **RF03** - Cadastrar Produto | **RF04** - Consultar Produto | **RF05** - Registrar Venda | **RF06** - Atualizar Estoque | **RF07** - Registrar Venda a Prazo | **RF08** - Emitir Comprovante | **RF09** - Gerar Conta a Receber | **RF10** - Consultar Histórico.
-
----
-
-## 4. Requisitos Não Funcionais
-**RNF01** - Usabilidade (Interface intuitiva) | **RNF02** - Desempenho (< 3s) | **RNF03** - Segurança (Acesso por perfil) | **RNF04** - Disponibilidade (99% em horário comercial).
+* **RN01 — Saldo Positivo:** Bloqueia venda se o estoque estiver zerado.  
+* **RN02 — Venda Nominal:** Venda a prazo exige cliente cadastrado.  
+* **RN03 — Baixa Automática:** Toda venda subtrai itens do inventário.  
+* **RN04 — Registro de Débito:** Vendas a prazo geram títulos financeiros.  
+* **RN05 — Recibo Detalhado:** Toda venda gera um comprovante impresso ou digital.
 
 ---
 
 ## 5. Casos de Uso (Geral)
-<img width="1216" height="477" alt="image" src="https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb" />
-
-
-
+![Diagrama Geral](https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb)
 
 ---
 
 ## 6. Documentação dos Casos de Uso
 
 ### UC01 — Cadastrar Cliente
-**Ator(es):** Atendente  
-**Descrição:** Registro de novos consumidores.  
-**Pré-condições:** Sistema logado.  
-**Pós-condições:** Cliente salvo no banco.  
+**Ator:** Atendente | **Descrição:** Registro de novos consumidores.  
+**Fluxos Alternativos:** FA01 (CPF Duplicado), FA02 (Dados Incompletos).  
+**Relacionamentos:** Nenhum.  
+![Atividade UC01](https://github.com/user-attachments/assets/65b31677-fbef-4d35-951f-91db5e24c910)
 
-**Fluxo Principal:** 1. Atendente solicita CPF. 2. Sistema valida existência. 3. Atendente preenche dados. 4. Sistema confirma.  
+---
 
-**Fluxos Alternativos / Exceções:** - **FA01 — CPF já cadastrado:** Sistema sugere atualizar cadastro.  
-- **FA02 — Dados incompletos:** Sistema impede salvamento.  
+### UC02 — Consultar Cliente
+**Ator:** Atendente | **Descrição:** Localizar dados de clientes.  
+**Exceções:** Cliente não encontrado.  
+**Relacionamentos:** Extend: UC10.  
+![Atividade UC02]([COLE_AQUI_O_LINK_DA_IMAGEM])
 
-**Relacionamentos:** - **Include:** Nenhum | **Extend:** Nenhum  
+---
 
-<img width="521" height="896" alt="image" src="https://github.com/user-attachments/assets/65b31677-fbef-4d35-951f-91db5e24c910" />
+### UC03 — Inserir Produto no Catálogo
+**Ator:** Gerente | **Descrição:** Cadastro técnico de medicamentos/itens.  
+**Exceções:** Código de barras duplicado.  
+![Atividade UC03]([COLE_AQUI_O_LINK_DA_IMAGEM])
 
+---
+
+### UC04 — Localizar Produto
+**Ator:** Atendente | **Descrição:** Consulta de preço e saldo em estoque.  
+![Atividade UC04]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+---
 
 ### UC05 — Registrar Venda
-**Ator(es):** Atendente  
-**Descrição:** Venda de produtos no balcão.  
-**Pré-condições:** Produto em estoque.  
-**Pós-condições:** Venda concluída e estoque baixado.  
+**Ator:** Atendente | **Descrição:** Operação principal de saída de mercadoria.  
+**Relacionamentos:** Include: UC07, UC08. Extend: UC06.  
+![Atividade UC05]([COLE_AQUI_O_LINK_DA_IMAGEM])
 
-**Fluxo Principal:** 1. Atendente bipa itens. 2. Sistema soma valores. 3. Seleção do pagamento. 4. Finalização.  
+---
 
-**Fluxos Alternativos / Exceções:** - **FA01 — Estoque Insuficiente:** Alerta visual e bloqueio do item.  
-- **FA02 — Cancelamento:** Atendente remove item do carrinho.  
+### UC06 — Registrar Venda a Prazo
+**Ator:** Atendente | **Descrição:** Venda via crediário para clientes cadastrados.  
+**Relacionamentos:** Include: UC09.  
+![Atividade UC06]([COLE_AQUI_O_LINK_DA_IMAGEM])
 
-**Relacionamentos:** - **Include:** UC07 (Estoque), UC08 (Comprovante) | **Extend:** UC06 (Venda a Prazo)  
+---
 
-*(Repetir estrutura para os outros 8 casos conforme os modelos anteriores)*
+### UC07 — Atualizar Estoque
+**Ator:** Sistema | **Descrição:** Baixa automática de itens no inventário.  
+![Atividade UC07]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+---
+
+### UC08 — Emitir Comprovante
+**Ator:** Sistema | **Descrição:** Geração de cupom fiscal ou recibo.  
+![Atividade UC08]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+---
+
+### UC09 — Gerar Conta a Receber
+**Ator:** Financeiro | **Descrição:** Lançamento de títulos de parcelamento.  
+![Atividade UC09]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+---
+
+### UC10 — Ver Histórico de Compras
+**Ator:** Atendente | **Descrição:** Relatório de consumo por cliente.  
+![Atividade UC10]([COLE_AQUI_O_LINK_DA_IMAGEM])
