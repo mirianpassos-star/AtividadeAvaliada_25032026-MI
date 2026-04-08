@@ -36,7 +36,6 @@ Este MVP foca no **fluxo crítico de vendas e controle de estoque**. O objetivo 
 ---
 
 ## 5. Casos de Uso (Geral)
-*(Aqui você deve inserir a imagem do diagrama que você gerou no PlantText)*
 <img width="1216" height="477" alt="image" src="https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb" />
 
 
