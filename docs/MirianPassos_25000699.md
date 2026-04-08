@@ -1,1 +1,127 @@
 
+# Avaliação — Engenharia de Software
+## Sistema Integrado de Gestão de Farmácia — MVP Definido pelo Estudante
+
+**Aluno:** Mirian Suelen Passos  
+**RA:** 25000699  
+**Data:** 25/03/2026
+
+---
+
+## 1. Definição do MVP
+Este MVP foi desenhado para sustentar o **core comercial da farmácia**, focando na agilidade do balcão e no controle de quem consome. O objetivo é que o fluxo de venda, do cadastro à baixa física, seja fluido e sem erros.
+
+### Incluído no MVP
+- Gestão de cadastros (Clientes e Itens)
+- Interface de consulta rápida de preços e saldos
+- Módulo de Frente de Caixa (PDV)
+- Fluxo de crediário/vendas a prazo
+- Sincronização de inventário pós-venda
+- Emissão de recibos de compra
+- Controle de títulos a receber (financeiro básico)
+- Log de histórico de compras por CPF
+
+### Fora do MVP
+- Compras e cotações com fornecedores
+- Gestão de contas a pagar e despesas fixas
+- Dashboards de BI e análises de lucro
+- Hierarquias complexas de acesso
+- Comunicação entre filiais (Multi-loja)
+
+### Justificativa
+O foco está na **operação imediata**. Uma farmácia precisa vender e gerenciar o estoque em tempo real. Funções administrativas de retaguarda podem ser implementadas em uma segunda fase, sem comprometer a abertura da loja.
+
+---
+
+## 2. Regras de Negócio 
+
+**RN01 — Saldo Positivo:** O sistema bloqueia a inserção de produtos no carrinho se o estoque físico constar como zerado.
+
+**RN02 — Venda Nominal:** Para processar vendas a prazo, o vínculo com um cliente já cadastrado é pré-requisito obrigatório.
+
+**RN03 — Baixa Automática:** Toda conclusão de venda gera um gatilho imediato de subtração no saldo do inventário.
+
+**RN04 — Registro de Débito:** Vendas a prazo alimentam automaticamente o módulo de "Contas a Receber" com data e valor da parcela.
+
+**RN05 — Recibo Detalhado:** Nenhuma venda é encerrada sem a geração de um comprovante listando itens, descontos e total.
+
+### Regras de Negócio Extras
+**RN06 — Bloqueio de Itens Avulsos:** Não se permite vender mercadorias que não estejam previamente catalogadas no banco de dados.
+
+**RN07 — Validação de Balcão:** O atendente deve realizar a busca do item no sistema antes de confirmar a venda, garantindo a integridade do preço.
+
+**RN08 — Rastreabilidade de Consumo:** O histórico de transações deve ser persistente e vinculado ao perfil do cliente.
+
+**RN09 — Ciclo de Vida do Título:** O sistema deve monitorar o status das parcelas (Aberta, Paga ou Atrasada) de forma dinâmica.
+
+**RN10 — Segurança por Perfil:** O acesso às funções de edição e exclusão é restrito ao nível de permissão do usuário logado.
+
+---
+
+## 3. Requisitos Funcionais 
+**RF01 — Cadastro de Clientes:** Interface para registrar nome, contato e endereço de novos usuários.
+
+**RF02 — Busca de Clientes:** Localização de perfis por nome ou documento (CPF).
+
+**RF03 — Gestão de Produtos:** Cadastro técnico de itens (fabricante, preço, unidade).
+
+**RF04 — Consulta de Itens:** Pesquisa ágil via código de barras ou descrição parcial.
+
+**RF05 — Terminal de Vendas:** Registro de itens selecionados e finalização do carrinho.
+
+**RF06 — Ajuste de Estoque:** Atualização automática de quantidades disponíveis no sistema.
+
+**RF07 — Módulo de Crediário:** Geração de prazos e parcelas para pagamentos futuros.
+
+**RF08 — Geração de Recibos:** Emissão de comprovante físico ou digital após a venda.
+
+---
+
+## 4. Requisitos Não Funcionais
+
+**RNF01 — Experiência do Usuário:** A navegação deve ser intuitiva para que o treinamento de novos atendentes seja rápido.
+
+**RNF02 — Tempo de Resposta:** Processamento de buscas e fechamento de vendas em no máximo 3 segundos.
+
+**RNF03 — Integridade:** Mecanismos de login e senha para proteger dados sensíveis de estoque e caixa.
+
+**RNF04 — Disponibilidade:** O software deve operar de forma estável durante todo o período comercial.
+
+---
+
+## 5. Casos de Uso (MVP)
+
+### Atores principais
+- **Atendente:** Operador do dia a dia.
+- **Financeiro:** Responsável pelo fluxo de caixa e cobrança.
+- **Sistema:** Automatizador de processos internos.
+
+### Casos de Uso do MVP (10)
+1. Cadastrar Cliente  
+2. Consultar Cliente  
+3. Inserir Produto no Catálogo  
+4. Localizar Produto  
+5. Efetuar Venda  
+6. Registrar Venda a Prazo (<<extend>> “Efetuar Venda”)  
+7. Atualizar Saldo (<<include>> de “Efetuar Venda”)  
+8. Imprimir Comprovante (<<include>> de “Efetuar Venda”)  
+9. Lançar Recebível (<<include>> de “Registrar Venda a Prazo”)  
+10. Ver Histórico de Compras (<<extend>> “Consultar Cliente”)  
+
+---
+
+## 6. Documentação dos Casos de Uso
+
+# Documentação dos Casos de Uso - MVP Sistema Saúde & Vida
+
+## UC01 — Cadastrar Cliente
+Permite a entrada de dados de novos consumidores. O atendente insere as informações básicas e o sistema valida a duplicidade de CPF antes de salvar.
+
+## UC05 — Registrar Venda
+Fluxo central onde os itens são bipados. O sistema valida o estoque (UC07) e, ao final, solicita a forma de pagamento. Conclui com a emissão do ticket (UC08).
+
+## UC06 — Registrar Venda a Prazo
+Caso o pagamento não seja imediato, o sistema exige um cliente identificado e dispara a criação de um título financeiro no UC09.
+
+## UC07 — Atualizar Estoque
+Rotina automática que subtrai as unidades vendidas do saldo total, garantindo que o inventário reflita a realidade física da prateleira.
