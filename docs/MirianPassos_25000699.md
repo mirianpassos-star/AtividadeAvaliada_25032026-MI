@@ -74,52 +74,70 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ---
 
 ### UC03 — Inserir Produto no Catálogo
+**Ator(es):** Atendente (Gerente)  
+**Descrição:** Inclusão de novos itens no catálogo.  
+**Fluxo Principal:** 1. Informar Código/Nome. 2. Definir Preço e Estoque inicial. 3. Salvar.  
+**Exceções:** FA01 — Produto já existente.
 
 
 <img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/c04b82af-055e-44a2-9610-fb13c9fc48d0" />
 
-
-
 ---
 
-### UC04 — Localizar Produto
-**Ator:** Atendente | **Descrição:** Consulta de preço e saldo em estoque.  
+
+### UC04 — Consultar Produto
+**Ator(es):** Atendente  
+**Descrição:** Verificação de preço e saldo.  
+**Fluxo Principal:** 1. Bipar produto. 2. Sistema exibe informações.
 
 <img width="413" height="273" alt="image" src="https://github.com/user-attachments/assets/6ac97fed-779d-491b-bb7f-d3eccfd67343" />
 
-
 ### UC05 — Registrar Venda
-**Ator:** Atendente | **Descrição:** Operação principal de saída de mercadoria.  
-**Relacionamentos:** Include: UC07, UC08. Extend: UC06.  
+**Ator(es):** Atendente  
+**Descrição:** Venda de produtos no balcão.  
+**Pré-condições:** Produto em estoque.  
+**Fluxo Principal:** 1. Bipar itens. 2. Somar valores. 3. Selecionar pagamento. 4. Finalizar.  
+**Exceções:** FA01 — Estoque insuficiente.  
+**Relacionamentos:** Include: UC07, UC08 | Extend: UC06.
+
 <img width="672" height="749" alt="image" src="https://github.com/user-attachments/assets/17a0bb71-8add-4813-a6e0-a9893140d2c6" />
 
 
 ---
 
 ### UC06 — Registrar Venda a Prazo
-**Ator:** Atendente | **Descrição:** Venda via crediário para clientes cadastrados.  
-**Relacionamentos:** Include: UC09.  
+**Ator(es):** Atendente / Financeiro  
+**Descrição:** Venda via crediário da loja.  
+**Fluxo Principal:** 1. Identificar cliente. 2. Escolher parcelas. 3. Confirmar.  
+**Relacionamentos:** Include: UC09 | Extend: UC05. 
 <img width="741" height="441" alt="image" src="https://github.com/user-attachments/assets/5b04f900-2bd4-4ccd-ba29-ee2c95bab14a" />
 
 
 ---
 
 ### UC07 — Atualizar Estoque
-**Ator:** Sistema | **Descrição:** Baixa automática de itens no inventário.  
+**Ator(es):** Sistema  
+**Descrição:** Baixa automática após venda.  
+**Fluxo Principal:** 1. Receber itens da venda. 2. Subtrair do banco. 3. Confirmar baixa.
+
 <img width="253" height="351" alt="image" src="https://github.com/user-attachments/assets/153c95fb-5860-4695-93ce-483992dbc39e" />
 
 
 ---
 
 ### UC08 — Emitir Comprovante
-**Ator:** Sistema | **Descrição:** Geração de cupom fiscal ou recibo.  
+**Ator(es):** Sistema  
+**Descrição:** Geração do cupom de venda.  
+**Fluxo Principal:** 1. Coletar dados da venda. 2. Gerar layout. 3. Imprimir ou gerar PDF.
 <img width="432" height="266" alt="image" src="https://github.com/user-attachments/assets/4dcb7c63-3f2f-41b3-b971-0f996e2487d7" />
 
 
 ---
 
 ### UC09 — Gerar Conta a Receber
-**Ator:** Financeiro | **Descrição:** Lançamento de títulos de parcelamento.  
+**Ator(es):** Sistema / Financeiro  
+**Descrição:** Lançamento de títulos no financeiro.  
+**Fluxo Principal:** 1. Receber dados do UC06. 2. Agendar vencimentos. 3. Salvar título.
 
 <img width="432" height="381" alt="image" src="https://github.com/user-attachments/assets/70037214-6317-4685-8977-ddc1cbe06b66" />
 
