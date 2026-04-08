@@ -94,25 +94,30 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ### UC06 — Registrar Venda a Prazo
 **Ator:** Atendente | **Descrição:** Venda via crediário para clientes cadastrados.  
 **Relacionamentos:** Include: UC09.  
+<img width="741" height="441" alt="image" src="https://github.com/user-attachments/assets/5b04f900-2bd4-4ccd-ba29-ee2c95bab14a" />
 
 
 ---
 
 ### UC07 — Atualizar Estoque
 **Ator:** Sistema | **Descrição:** Baixa automática de itens no inventário.  
-![Atividade UC07]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="253" height="351" alt="image" src="https://github.com/user-attachments/assets/153c95fb-5860-4695-93ce-483992dbc39e" />
+
 
 ---
 
 ### UC08 — Emitir Comprovante
 **Ator:** Sistema | **Descrição:** Geração de cupom fiscal ou recibo.  
-![Atividade UC08]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="432" height="266" alt="image" src="https://github.com/user-attachments/assets/4dcb7c63-3f2f-41b3-b971-0f996e2487d7" />
+
 
 ---
 
 ### UC09 — Gerar Conta a Receber
 **Ator:** Financeiro | **Descrição:** Lançamento de títulos de parcelamento.  
-![Atividade UC09]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+<img width="432" height="381" alt="image" src="https://github.com/user-attachments/assets/70037214-6317-4685-8977-ddc1cbe06b66" />
+
 
 ---
 
