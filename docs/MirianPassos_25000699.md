@@ -50,25 +50,31 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ## 6. Documentação dos Casos de Uso
 
 ### UC01 — Cadastrar Cliente
-**Ator:** Atendente | **Descrição:** Registro de novos consumidores.  
-**Fluxos Alternativos:** FA01 (CPF Duplicado), FA02 (Dados Incompletos).  
-**Relacionamentos:** Nenhum.  
+**Ator(es):** Atendente  
+**Descrição:** Registro de novos consumidores.  
+**Pré-condições:** Sistema logado.  
+**Pós-condições:** Cliente salvo no banco.  
+
+**Fluxo Principal:** 1. Atendente solicita CPF. 2. Sistema valida existência. 3. Atendente preenche dados. 4. Sistema confirma.  
+**Fluxos Alternativos / Exceções:** FA01 — CPF já cadastrado; FA02 — Dados incompletos.  
+**Relacionamentos:** Include: Nenhum | Extend: Nenhum
 <img width="954" height="559" alt="image" src="https://github.com/user-attachments/assets/8c2835ab-9846-4370-baee-3c41d099b00b" />
 
 ---
 
 ### UC02 — Consultar Cliente
-**Ator:** Atendente | **Descrição:** Localizar dados de clientes.  
-**Exceções:** Cliente não encontrado.  
-**Relacionamentos:** Extend: UC10.  
+**Ator(es):** Atendente  
+**Descrição:** Busca de dados de clientes cadastrados.  
+**Fluxo Principal:** 1. Informar Nome/CPF. 2. Sistema busca no banco. 3. Exibir dados.  
+**Exceções:** FA01 — Cliente não encontrado.  
+**Relacionamentos:** Extend: UC10 (Histórico).
 <img width="736" height="387" alt="image" src="https://github.com/user-attachments/assets/4a825a56-f725-4227-b67a-184d11581714" />
 
 
 ---
 
 ### UC03 — Inserir Produto no Catálogo
-**Ator:** Gerente | **Descrição:** Cadastro técnico de medicamentos/itens.  
-**Exceções:** Código de barras duplicado.  
+
 
 <img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/c04b82af-055e-44a2-9610-fb13c9fc48d0" />
 
