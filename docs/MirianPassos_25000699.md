@@ -80,20 +80,21 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 
 
 
-<img width="657" height="337" alt="image" src="https://github.com/user-attachments/assets/627d82a3-3ab2-4477-b4a6-51e02e1fc69d" />
+
 
 
 ### UC05 — Registrar Venda
 **Ator:** Atendente | **Descrição:** Operação principal de saída de mercadoria.  
 **Relacionamentos:** Include: UC07, UC08. Extend: UC06.  
-![Atividade UC05]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="672" height="749" alt="image" src="https://github.com/user-attachments/assets/17a0bb71-8add-4813-a6e0-a9893140d2c6" />
+
 
 ---
 
 ### UC06 — Registrar Venda a Prazo
 **Ator:** Atendente | **Descrição:** Venda via crediário para clientes cadastrados.  
 **Relacionamentos:** Include: UC09.  
-![Atividade UC06]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
 
 ---
 
