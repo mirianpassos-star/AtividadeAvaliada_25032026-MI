@@ -53,7 +53,7 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 **Ator:** Atendente | **Descrição:** Registro de novos consumidores.  
 **Fluxos Alternativos:** FA01 (CPF Duplicado), FA02 (Dados Incompletos).  
 **Relacionamentos:** Nenhum.  
-![Atividade UC01](https://github.com/user-attachments/assets/65b31677-fbef-4d35-951f-91db5e24c910)
+<img width="954" height="559" alt="image" src="https://github.com/user-attachments/assets/8c2835ab-9846-4370-baee-3c41d099b00b" />
 
 ---
 
@@ -61,7 +61,8 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 **Ator:** Atendente | **Descrição:** Localizar dados de clientes.  
 **Exceções:** Cliente não encontrado.  
 **Relacionamentos:** Extend: UC10.  
-![Atividade UC02]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="736" height="387" alt="image" src="https://github.com/user-attachments/assets/4a825a56-f725-4227-b67a-184d11581714" />
+
 
 ---
 
@@ -74,7 +75,8 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 
 ### UC04 — Localizar Produto
 **Ator:** Atendente | **Descrição:** Consulta de preço e saldo em estoque.  
-![Atividade UC04]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/f26bd441-e536-4b23-a4a6-0cd9123374fb" />
+
 
 ---
 
