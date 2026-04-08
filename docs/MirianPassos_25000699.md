@@ -22,7 +22,7 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ---
 
 ## 5. Casos de Uso (Geral)
-### UC05 — Registrar Venda
+###  Registrar Venda
 **Ator(es):** Atendente  
 **Descrição:** Processo principal de bipagem de itens, conferência de estoque e recebimento de valores no balcão.  
 **Pré-condições:** Atendente logado no sistema; Produtos com saldo positivo no inventário.  
