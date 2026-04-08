@@ -1,4 +1,3 @@
-
 # Avaliação — Engenharia de Software
 ## Sistema Integrado de Gestão de Farmácia — MVP Definido pelo Estudante
 
@@ -21,110 +20,115 @@ Este MVP foi desenhado para sustentar o **core comercial da farmácia**, focando
 - Controle de títulos a receber (financeiro básico)
 - Log de histórico de compras por CPF
 
-### Fora do MVP
-- Compras e cotações com fornecedores
-- Gestão de contas a pagar e despesas fixas
-- Dashboards de BI e análises de lucro
-- Hierarquias complexas de acesso
-- Comunicação entre filiais (Multi-loja)
-
-### Justificativa
-O foco está na **operação imediata**. Uma farmácia precisa vender e gerenciar o estoque em tempo real. Funções administrativas de retaguarda podem ser implementadas em uma segunda fase, sem comprometer a abertura da loja.
-
 ---
 
 ## 2. Regras de Negócio 
 
 **RN01 — Saldo Positivo:** O sistema bloqueia a inserção de produtos no carrinho se o estoque físico constar como zerado.
-
 **RN02 — Venda Nominal:** Para processar vendas a prazo, o vínculo com um cliente já cadastrado é pré-requisito obrigatório.
-
 **RN03 — Baixa Automática:** Toda conclusão de venda gera um gatilho imediato de subtração no saldo do inventário.
-
-**RN04 — Registro de Débito:** Vendas a prazo alimentam automaticamente o módulo de "Contas a Receber" com data e valor da parcela.
-
-**RN05 — Recibo Detalhado:** Nenhuma venda é encerrada sem a geração de um comprovante listando itens, descontos e total.
-
-### Regras de Negócio Extras
-**RN06 — Bloqueio de Itens Avulsos:** Não se permite vender mercadorias que não estejam previamente catalogadas no banco de dados.
-
-**RN07 — Validação de Balcão:** O atendente deve realizar a busca do item no sistema antes de confirmar a venda, garantindo a integridade do preço.
-
-**RN08 — Rastreabilidade de Consumo:** O histórico de transações deve ser persistente e vinculado ao perfil do cliente.
-
-**RN09 — Ciclo de Vida do Título:** O sistema deve monitorar o status das parcelas (Aberta, Paga ou Atrasada) de forma dinâmica.
-
-**RN10 — Segurança por Perfil:** O acesso às funções de edição e exclusão é restrito ao nível de permissão do usuário logado.
+**RN04 — Registro de Débito:** Vendas a prazo alimentam automaticamente o módulo de "Contas a Receber".
+**RN05 — Recibo Detalhado:** Nenhuma venda é encerrada sem a geração de um comprovante listando itens e total.
 
 ---
 
 ## 3. Requisitos Funcionais 
 **RF01 — Cadastro de Clientes:** Interface para registrar nome, contato e endereço de novos usuários.
-
 **RF02 — Busca de Clientes:** Localização de perfis por nome ou documento (CPF).
-
 **RF03 — Gestão de Produtos:** Cadastro técnico de itens (fabricante, preço, unidade).
-
 **RF04 — Consulta de Itens:** Pesquisa ágil via código de barras ou descrição parcial.
-
 **RF05 — Terminal de Vendas:** Registro de itens selecionados e finalização do carrinho.
-
-**RF06 — Ajuste de Estoque:** Atualização automática de quantidades disponíveis no sistema.
-
-**RF07 — Módulo de Crediário:** Geração de prazos e parcelas para pagamentos futuros.
-
-**RF08 — Geração de Recibos:** Emissão de comprovante físico ou digital após a venda.
 
 ---
 
 ## 4. Requisitos Não Funcionais
-
-**RNF01 — Experiência do Usuário:** A navegação deve ser intuitiva para que o treinamento de novos atendentes seja rápido.
-
-**RNF02 — Tempo de Resposta:** Processamento de buscas e fechamento de vendas em no máximo 3 segundos.
-
-**RNF03 — Integridade:** Mecanismos de login e senha para proteger dados sensíveis de estoque e caixa.
-
-**RNF04 — Disponibilidade:** O software deve operar de forma estável durante todo o período comercial.
+**RNF01 — Usabilidade:** Interface intuitiva para baixa curva de aprendizado.
+**RNF02 — Desempenho:** Resposta das consultas e processamento em até 3 segundos.
+**RNF03 — Segurança:** Restrição de acesso por perfil (Atendente, Gerente, Financeiro).
 
 ---
 
 ## 5. Casos de Uso (MVP)
 
 ### Atores principais
-- **Atendente:** Operador do dia a dia.
-- **Financeiro:** Responsável pelo fluxo de caixa e cobrança.
-- **Sistema:** Automatizador de processos internos.
-
-### Casos de Uso do MVP (10)
-1. Cadastrar Cliente  
-2. Consultar Cliente  
-3. Inserir Produto no Catálogo  
-4. Localizar Produto  
-5. Efetuar Venda  
-6. Registrar Venda a Prazo (<<extend>> “Efetuar Venda”)  
-7. Atualizar Saldo (<<include>> de “Efetuar Venda”)  
-8. Imprimir Comprovante (<<include>> de “Efetuar Venda”)  
-9. Lançar Recebível (<<include>> de “Registrar Venda a Prazo”)  
-10. Ver Histórico de Compras (<<extend>> “Consultar Cliente”)  
+- **Atendente:** Realiza vendas e cadastros.
+- **Financeiro:** Gerencia os títulos de vendas a prazo.
+- **Sistema:** Executa processamentos automáticos.
 
 ---
 
-## 6. Documentação dos Casos de Uso
+## 6. Documentação Detalhada dos Casos de Uso
 
-# Documentação dos Casos de Uso - MVP Sistema Saúde & Vida
+### UC01 — Cadastrar Cliente
+**Ator:** Atendente  
+**Descrição:** Permite incluir novos clientes para viabilizar histórico e vendas a prazo.  
+**Fluxo Principal:** 1. Solicitar dados (CPF, Nome, Telefone). 
+2. Sistema valida CPF. 
+3. Atendente preenche e salva.
 
-## UC01 — Cadastrar Cliente
-Permite a entrada de dados de novos consumidores. O atendente insere as informações básicas e o sistema valida a duplicidade de CPF antes de salvar.
+**Fluxos Alternativos / Exceções:** - **FA01 — CPF já cadastrado:** O sistema alerta que o registro existe e oferece a opção de edição.  
+- **FA02 — CPF Inválido:** O sistema impede o salvamento e solicita correção do número.
 
-## UC05 — Registrar Venda
-Fluxo central onde os itens são bipados. O sistema valida o estoque (UC07) e, ao final, solicita a forma de pagamento. Conclui com a emissão do ticket (UC08).
+**Relacionamentos:** - **Incluir:** Nenhum  
+- **Estender:** Nenhum
 
-## UC06 — Registrar Venda a Prazo
-Caso o pagamento não seja imediato, o sistema exige um cliente identificado e dispara a criação de um título financeiro no UC09.
+---
 
-## UC07 — Atualizar Estoque
-Rotina automática que subtrai as unidades vendidas do saldo total, garantindo que o inventário reflita a realidade física da prateleira.
+### UC05 — Registrar Venda
+**Ator:** Atendente  
+**Descrição:** Registro de saída de mercadorias no balcão.  
+**Fluxo Principal:** 1. Atendente inicia venda. 
+2. Sistema solicita identificação (opcional para à vista). 
+3. Inserção de itens. 
+4. Fechamento e escolha do pagamento.
 
-<img width="2392" height="694" alt="image" src="https://github.com/user-attachments/assets/c95bdb37-9857-4a5a-9e17-c4cb75935d58" />
- <img width="2138" height="423" alt="image" src="https://github.com/user-attachments/assets/35eeb26b-9280-4053-9c55-16f9e60158dd" />
+**Fluxos Alternativos / Exceções:** - **FA01 — Estoque Insuficiente:** O sistema gera alerta visual e impede a adição do item (RN01).  
+- **FA02 — Cancelamento de Item:** Atendente remove item antes de fechar o total.
+
+**Relacionamentos:** - **Incluir:** UC07 (Atualizar Estoque), UC08 (Emitir Comprovante).  
+- **Estender:** UC06 (Registrar Venda a Prazo).
+
+---
+
+### UC06 — Registrar Venda a Prazo
+**Ator:** Atendente / Financeiro  
+**Descrição:** Processa vendas que geram dívida para o cliente.
+
+**Fluxos Alternativos / Exceções:** - **FA01 — Cliente não identificado:** O sistema exige a execução do UC02/UC01 para prosseguir.  
+- **FA02 — Cliente com pendências:** O sistema alerta sobre débitos atrasados antes de autorizar nova venda.
+
+**Relacionamentos:** - **Incluir:** UC09 (Gerar Conta a Receber).  
+- **Estender:** Extensão do UC05.
+
+---
+
+### UC07 — Atualizar Estoque
+**Ator:** Sistema  
+**Descrição:** Subtração automática das quantidades após a venda.
+
+**Fluxos Alternativos / Exceções:** - **FA01 — Erro de comunicação com Banco de Dados:** O sistema armazena a transação em log local para sincronização posterior.
+
+**Relacionamentos:** - **Incluir:** Nenhum.  
+- **Estender:** Nenhum (Incluso no UC05).
+
+---
+
+### UC08 — Emitir Comprovante
+**Ator:** Sistema  
+**Descrição:** Impressão ou geração de PDF do resumo da venda.
+
+**Fluxos Alternativos / Exceções:** - **FA01 — Falha na Impressora:** O sistema oferece a opção de envio do comprovante por e-mail ou WhatsApp.
+
+**Relacionamentos:** - **Incluir:** Nenhum.  
+- **Estender:** Nenhum.
+
+---
+
+### UC10 — Consultar Histórico de Compras
+**Ator:** Atendente / Cliente  
+**Descrição:** Exibe todas as compras vinculadas a um CPF específico.
+
+**Fluxos Alternativos / Exceções:** - **FA01 — Cliente sem registros:** Sistema exibe mensagem informando que não há compras para o CPF informado.
+
+**Relacionamentos:** - **Incluir:** Nenhum.  
+- **Estender:** Extensão do UC02 (Consultar Cliente).
