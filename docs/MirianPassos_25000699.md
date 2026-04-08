@@ -14,8 +14,6 @@ Este MVP foca no **fluxo crítico de vendas e controle de estoque**. O objetivo 
 * **Fora do MVP:** Compras de fornecedores, contas a pagar, relatórios de BI e gestão de múltiplas filiais.
 * **Justificativa:** Priorizou-se a saúde financeira imediata (vendas e recebíveis) e a integridade do inventário.
 
-<img width="1216" height="477" alt="image" src="https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb" />
-
 
 ## 2. Regras de Negócio 
 
@@ -39,7 +37,10 @@ Este MVP foca no **fluxo crítico de vendas e controle de estoque**. O objetivo 
 
 ## 5. Casos de Uso (Geral)
 *(Aqui você deve inserir a imagem do diagrama que você gerou no PlantText)*
-![Diagrama de Casos de Uso Geral](./documentos/diagrama_geral.png)
+<img width="1216" height="477" alt="image" src="https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb" />
+
+
+
 
 ---
 
