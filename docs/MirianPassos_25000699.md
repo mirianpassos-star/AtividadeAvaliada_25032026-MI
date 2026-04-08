@@ -145,6 +145,9 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ---
 
 ### UC10 — Ver Histórico de Compras
-**Ator:** Atendente | **Descrição:** Relatório de consumo por cliente.  
+**Ator(es):** Atendente  
+**Descrição:** Consulta de transações passadas do cliente.  
+**Fluxo Principal:** 1. Consultar Cliente (UC02). 2. Listar compras vinculadas.  
+**Relacionamentos:** Extend: UC02.
 <img width="675" height="391" alt="image" src="https://github.com/user-attachments/assets/6c3c5f24-a8b2-4e63-8192-85f3cefe8fcf" />
 
