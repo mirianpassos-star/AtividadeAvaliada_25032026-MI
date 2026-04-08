@@ -132,3 +132,6 @@ Este MVP foi desenhado para sustentar o **core comercial da farmácia**, focando
 
 **Relacionamentos:** - **Incluir:** Nenhum.  
 - **Estender:** Extensão do UC02 (Consultar Cliente).
+
+  <img width="2410" height="480" alt="image" src="https://github.com/user-attachments/assets/d9a89c58-1763-4143-847d-e4e3fa4cb832" />
+
