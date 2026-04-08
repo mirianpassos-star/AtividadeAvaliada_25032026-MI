@@ -70,7 +70,8 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 **Ator:** Gerente | **Descrição:** Cadastro técnico de medicamentos/itens.  
 **Exceções:** Código de barras duplicado.  
 
-<img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/b992a375-2970-42ce-af84-19d8be5e4094" />
+<img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/c04b82af-055e-44a2-9610-fb13c9fc48d0" />
+
 
 
 ---
