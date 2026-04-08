@@ -22,6 +22,27 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ---
 
 ## 5. Casos de Uso (Geral)
+### UC05 — Registrar Venda
+**Ator(es):** Atendente  
+**Descrição:** Processo principal de bipagem de itens, conferência de estoque e recebimento de valores no balcão.  
+**Pré-condições:** Atendente logado no sistema; Produtos com saldo positivo no inventário.  
+**Pós-condições:** Venda registrada no banco de dados; Estoque atualizado; Comprovante emitido.  
+
+#### Fluxo Principal
+1. O Atendente inicia o terminal de vendas (PDV).
+2. O Atendente insere os produtos através de código de barras ou busca nominal.
+3. O Sistema valida o preço unitário e a disponibilidade física de cada item.
+4. O Atendente seleciona a forma de pagamento (Dinheiro, Cartão ou Prazo).
+5. O Sistema finaliza a transação e dispara as rotinas de baixa e impressão.
+
+#### Fluxos Alternativos / Exceções
+* **FA01 — Estoque Insuficiente:** O sistema identifica saldo zerado, emite um alerta sonoro/visual e impede a inclusão do item no carrinho.
+* **FA02 — Cancelamento de Item:** O atendente remove um produto da lista de compras a pedido do cliente antes do fechamento total.
+
+#### Relacionamentos
+* **Include:** UC07 (Atualizar Estoque), UC08 (Emitir Comprovante).
+* **Extend:** UC06 (Registrar Venda a Prazo).
+
 ![Diagrama Geral](https://github.com/user-attachments/assets/089a1ecd-5ab0-4d70-9f4f-d9073f5acdfb)
 
 ---
