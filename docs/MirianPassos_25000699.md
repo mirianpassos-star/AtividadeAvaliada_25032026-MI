@@ -69,16 +69,19 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ### UC03 — Inserir Produto no Catálogo
 **Ator:** Gerente | **Descrição:** Cadastro técnico de medicamentos/itens.  
 **Exceções:** Código de barras duplicado.  
-![Atividade UC03]([COLE_AQUI_O_LINK_DA_IMAGEM])
+
+<img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/b992a375-2970-42ce-af84-19d8be5e4094" />
+
 
 ---
 
 ### UC04 — Localizar Produto
 **Ator:** Atendente | **Descrição:** Consulta de preço e saldo em estoque.  
-<img width="610" height="367" alt="image" src="https://github.com/user-attachments/assets/f26bd441-e536-4b23-a4a6-0cd9123374fb" />
 
 
----
+
+<img width="657" height="337" alt="image" src="https://github.com/user-attachments/assets/627d82a3-3ab2-4477-b4a6-51e02e1fc69d" />
+
 
 ### UC05 — Registrar Venda
 **Ator:** Atendente | **Descrição:** Operação principal de saída de mercadoria.  
