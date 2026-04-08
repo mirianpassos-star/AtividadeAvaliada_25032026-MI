@@ -121,10 +121,14 @@ Permite a entrada de dados de novos consumidores. O atendente insere as informa�
 Fluxo central onde os itens são bipados. O sistema valida o estoque (UC07) e, ao final, solicita a forma de pagamento. Conclui com a emissão do ticket (UC08).
 
 ## UC06 — Registrar Venda a Prazo
-<img width="2138" height="423" alt="image" src="https://github.com/user-attachments/assets/35eeb26b-9280-4053-9c55-16f9e60158dd" />
-
-
 Caso o pagamento não seja imediato, o sistema exige um cliente identificado e dispara a criação de um título financeiro no UC09.
+
+
+
+<img width="2392" height="694" alt="image" src="https://github.com/user-attachments/assets/c95bdb37-9857-4a5a-9e17-c4cb75935d58" />
+ <img width="2138" height="423" alt="image" src="https://github.com/user-attachments/assets/35eeb26b-9280-4053-9c55-16f9e60158dd" />
+
+
 
 ## UC07 — Atualizar Estoque
 Rotina automática que subtrai as unidades vendidas do saldo total, garantindo que o inventário reflita a realidade física da prateleira.
