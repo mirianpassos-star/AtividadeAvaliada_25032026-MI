@@ -1,353 +1,161 @@
-# Avaliação — Engenharia de Software
-## Sistema Integrado de Gestão de Farmácia — MVP Definido pelo Estudante
+# Sistema Integrado de Gestão de Farmácia “Saúde & Vida”
 
-**Aluno:** Mirian Suelen Passos 
-**RA:** 25000699  
-**Data:** 25/03/2026
+A rede de farmácias **Saúde & Vida**, presente em diversas cidades e com unidades de portes distintos, decidiu modernizar completamente seus processos operacionais e administrativos. Embora já utilize sistemas simples para atividades pontuais, como consulta de preços e emissão de notas, a operação diária apresenta uma série de limitações: estoques divergentes entre unidades, dificuldades no registro de vendas, falhas em lançamentos financeiros e ausência de integração entre setores.
 
----
+Para solucionar esses problemas, a diretoria autorizou o desenvolvimento de um **Sistema Integrado de Gestão de Farmácia**, cujo objetivo é controlar de forma centralizada todos os processos relacionados à operação cotidiana: **vendas, estoque, produtos, clientes, compras, contas a pagar, contas a receber e indicadores de desempenho**.  
 
-## 1. Definição do MVP
-Meu MVP cobre o **processo de venda desde a identificação/cadastro do cliente até a emissão do comprovante**, incluindo:
-
-### Incluído no MVP
-- Cadastro e consulta de clientes  
-- Cadastro e consulta de produtos  
-- Registro de vendas  
-- Registro de vendas a prazo  
-- Atualização automática de estoque  
-- Emissão de comprovante de venda  
-- Geração de contas a receber para vendas a prazo  
-- Consulta de histórico de compras do cliente  
-
-### Fora do MVP
-- Compras a fornecedores  
-- Contas a pagar  
-- Relatórios estratégicos avançados  
-- Gestão completa de usuários e permissões  
-- Integração entre múltiplas unidades da farmácia  
-
-### Justificativa
-O foco do MVP é permitir que o fluxo de **vendas e clientes** funcione de forma confiável, garantindo atualização de estoque e registro de contas a receber, que são processos críticos para operação da farmácia.
+O novo sistema deverá ser utilizado por atendentes, farmacêuticos, gerentes de unidade e também por setores administrativos da matriz.
 
 ---
 
-## 2. Regras de Negócio (mínimo: 5)
+## 1. Operação da Farmácia e Atendimento ao Cliente
 
-**RN01 — Venda somente com estoque disponível**  
-Um produto só pode ser vendido se houver quantidade suficiente em estoque; caso contrário, o sistema impede a venda.
+No balcão, atendentes realizam vendas de medicamentos e produtos de conveniência. O processo inicia quando um cliente solicita um item, apresentando — quando necessário — receita médica. Os atendentes pesquisam produtos pelo nome, código de barras ou fabricante. Os produtos possuem características como:  
+- descrição  
+- preço de venda  
+- unidade de medida  
+- fabricante  
 
-**RN02 — Cadastro de cliente obrigatório para vendas a prazo**  
-Todas as vendas a prazo devem estar vinculadas a um cliente cadastrado, permitindo controle de contas a receber.
+Uma vez encontrado o produto, o atendente informa a quantidade desejada. O sistema deve verificar se a quantidade existe no estoque daquela unidade, bem como informar valores atualizados. Caso o cliente não possua cadastro, o atendente poderá registrá-lo rapidamente, permitindo vincular compras ao seu histórico.
 
-**RN03 — Atualização automática de estoque**  
-O estoque deve ser atualizado automaticamente após qualquer venda, devolução ou reposição.
+Alguns clientes realizam compras à vista; outros, especialmente empresas conveniadas ou clientes recorrentes, fazem compras a prazo, o que exige o registro automático em **contas a receber**, com controle de vencimentos e status (Aberta, Recebida, Atrasada).
 
-**RN04 — Registro de contas a receber**  
-Vendas a prazo geram automaticamente uma conta a receber com data de vencimento e status (Aberta, Recebida, Atrasada).
-
-**RN05 — Emissão de comprovante de venda**  
-Todo registro de venda deve gerar um comprovante detalhado, contendo cliente, produtos, quantidade, preço e valor total.
-
-### Regras de Negócio Extras
-**RN06 — Não vender produtos inexistentes**  
-Produtos que não estão cadastrados no sistema não podem ser vendidos.
-
-**RN07 — Consulta de produto obrigatória antes da venda**  
-O atendente deve consultar o produto no sistema antes de registrar a venda, garantindo informações corretas de preço e estoque.
-
-**RN08 — Histórico de compras do cliente**  
-Todas as compras realizadas devem ficar registradas no histórico do cliente, permitindo acompanhamento e análise futura.
-
-**RN09 — Controle de status das contas a receber**  
-O sistema deve atualizar automaticamente o status das contas a receber (Aberta, Recebida, Atrasada) conforme pagamentos sejam registrados.
-
-**RN10 — Restrição de acesso por perfil**  
-Cada usuário só pode realizar ações de acordo com seu perfil (atendente, gerente, financeiro, administrador), garantindo segurança e organização.
+Ao final de cada venda, o sistema deve emitir um comprovante contendo detalhes da operação.
 
 ---
 
-## 3. Requisitos Funcionais (mínimo: 8)
+## 2. Gestão de Estoque e Produtos
 
-**RF01 — Cadastro de clientes**  
-O sistema deve permitir cadastrar novos clientes com informações básicas (nome, telefone, endereço).
+Cada farmácia mantém seu próprio estoque, contendo a quantidade disponível de cada produto. Os estoques nem sempre estão alinhados com as vendas, pois hoje as atualizações são feitas manualmente, o que frequentemente gera divergências.
 
-**RF02 — Consulta de clientes**  
-O sistema deve permitir buscar clientes pelo nome ou CPF para vincular vendas.
+Com o novo sistema, cada unidade deve ter seu estoque atualizado **automaticamente** após qualquer:
 
-**RF03 — Cadastro de produtos**  
-O sistema deve permitir cadastrar produtos com descrição, preço, unidade de medida e fabricante.
+- venda  
+- devolução  
+- perda  
+- transferência  
+- reposição após compra  
 
-**RF04 — Consulta de produtos**  
-O sistema deve permitir pesquisar produtos pelo nome, código de barras ou fabricante.
+Além disso:
 
-**RF05 — Registro de vendas**  
-O sistema deve permitir registrar vendas de produtos, associando-os a um cliente e atualizando o estoque.
-
-**RF06 — Atualização automática de estoque**  
-O sistema deve atualizar automaticamente a quantidade disponível de produtos após cada venda ou devolução.
-
-**RF07 — Registro de vendas a prazo**  
-O sistema deve gerar automaticamente contas a receber para vendas realizadas a prazo, com vencimento e status.
-
-**RF08 — Emissão de comprovante de venda**  
-O sistema deve emitir um comprovante detalhado para cada venda, contendo cliente, produtos, quantidade, preço e valor total.
+- compras feitas aos fornecedores devem alimentar o estoque;  
+- produtos sem estoque não podem ser vendidos;  
+- o sistema deve alertar quando um produto estiver abaixo de um nível mínimo;  
+- gerentes podem cadastrar novos produtos ou atualizar informações.
 
 ---
 
-## 4. Requisitos Não Funcionais (mínimo: 4)
+## 3. Compras e Fornecedores
 
-**RNF01 — Usabilidade**  
-O sistema deve ter interface simples e intuitiva, permitindo que atendentes cadastrem clientes e realizem vendas com pouca ou nenhuma dificuldade.
+A rede compra produtos de diversos fornecedores. Cada compra deve registrar:
 
-**RNF02 — Desempenho**  
-O sistema deve processar consultas de produtos e vendas em até 3 segundos para garantir agilidade no atendimento.
+- produto adquirido  
+- quantidade  
+- data  
+- valor total  
+- fornecedor  
+- unidade da farmácia que está recebendo  
 
-**RNF03 — Segurança**  
-O sistema deve restringir acesso conforme perfil do usuário, garantindo que cada função só possa ser executada por usuários autorizados.
-
-**RNF04 — Disponibilidade**  
-O sistema deve estar disponível para uso durante todo o horário de funcionamento da farmácia, com mínima interrupção.
-
----
-
-## 5. Casos de Uso (MVP)
-
-### Atores principais
-- **Atendente** – realiza vendas e cadastra clientes  
-- **Cliente** – pode ser cadastrado e associado às vendas  
-- **Sistema** – realiza verificações e atualizações automáticas  
-- **Financeiro** – gerencia contas a receber  
-
-### Casos de Uso do MVP (10)
-1. Cadastrar Cliente  
-2. Consultar Cliente  
-3. Cadastrar Produto  
-4. Consultar Produto  
-5. Registrar Venda  
-6. Registrar Venda a Prazo (<<extend>> “Registrar Venda”)  
-7. Atualizar Estoque (<<include>> de “Registrar Venda”)  
-8. Emitir Comprovante de Venda (<<include>> de “Registrar Venda”)  
-9. Gerar Conta a Receber (<<include>> de “Registrar Venda a Prazo”)  
-10. Consultar Histórico de Compras do Cliente (<<extend>> “Consultar Cliente”)  
-
-### Relações importantes
-- Registrar Venda <<include>> Atualizar Estoque  
-- Registrar Venda <<include>> Emitir Comprovante de Venda  
-- Registrar Venda a Prazo <<include>> Gerar Conta a Receber  
-- Consultar Cliente <<extend>> Consultar Histórico de Compras do Cliente  
-- Registrar Venda <<extend>> Registrar Venda a Prazo (quando o cliente compra a prazo)
+Após uma compra, o estoque da unidade deve ser atualizado e o setor financeiro deve registrar o valor correspondente em **contas a pagar**, com datas de vencimento e status (Aberta, Paga, Atrasada).
 
 ---
 
-## 6. Documentação dos Casos de Uso
+## 4. Contas a Pagar e Contas a Receber
 
+O novo sistema deve permitir o acompanhamento financeiro de cada unidade.
 
+### Contas a Receber  
+Originam-se principalmente de vendas a prazo ou convênios.  
+Cada lançamento deve conter:
+- descrição  
+- valor  
+- data de vencimento  
+- data de recebimento  
+- status (Aberta, Recebida, Atrasada)
 
-# Documentação dos Casos de Uso - MVP Sistema Saúde & Vida
+### Contas a Pagar  
+Incluem pagamentos de fornecedores, despesas da unidade, impostos e serviços.  
+Cada lançamento deve conter:
+- descrição  
+- valor  
+- data de vencimento  
+- data de pagamento  
+- status (Aberta, Paga, Atrasada)
 
-## UC01 — Cadastrar Cliente
-**Ator(es):** Atendente  
-**Descrição:** Permite cadastrar um novo cliente, adicionando informações básicas para vincular compras futuras.  
-**Pré-condições:** Atendente deve estar logado no sistema.  
-**Pós-condições:** Cliente cadastrado no banco de dados.
-
-### Fluxo Principal
-1. Atendente seleciona “Cadastrar Cliente”.  
-2. Sistema solicita dados do cliente (nome, CPF, telefone, endereço).  
-3. Atendente preenche e confirma.  
-4. Sistema salva o cliente e confirma o cadastro.
-
-### Fluxos Alternativos / Exceções
-- **FA01 — Cliente já cadastrado:** Sistema alerta e oferece atualizar cadastro.
-
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
-
----
-
-## UC02 — Consultar Cliente
-**Ator(es):** Atendente, Cliente  
-**Descrição:** Permite buscar clientes cadastrados para vincular vendas ou visualizar informações.  
-**Pré-condições:** Cliente deve estar cadastrado.  
-**Pós-condições:** Informações do cliente exibidas.
-
-### Fluxo Principal
-1. Atendente seleciona “Consultar Cliente”.  
-2. Sistema solicita critério de busca (nome, CPF).  
-3. Atendente insere dados e confirma.  
-4. Sistema exibe os resultados.
-
-### Fluxos Alternativos / Exceções
-- **FA01 — Cliente não encontrado:** Sistema exibe mensagem “Cliente não encontrado”.
-
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Consultar Histórico de Compras do Cliente (UC10)
+O setor financeiro deve ser capaz de consultar facilmente lançamentos em aberto, atrasados e pagos, além de gerar relatórios.
 
 ---
 
-## UC03 — Cadastrar Produto
-**Ator(es):** Atendente  
-**Descrição:** Permite cadastrar produtos na farmácia, incluindo informações de estoque e preço.  
-**Pré-condições:** Atendente logado com permissão de gerente.  
-**Pós-condições:** Produto cadastrado no sistema.
+## 5. Relatórios e Indicadores
 
-### Fluxo Principal
-1. Atendente seleciona “Cadastrar Produto”.  
-2. Sistema solicita dados (nome, código de barras, preço, fabricante, unidade).  
-3. Atendente preenche e confirma.  
-4. Sistema salva o produto e confirma.
+A matriz deseja ter acesso a relatórios como:
 
-### Fluxos Alternativos / Exceções
-- **FA01 — Produto já cadastrado:** Sistema alerta e oferece atualizar dados.
+- produtos mais vendidos  
+- estoque por unidade  
+- vendas totais por dia, semana e mês  
+- total comprado por fornecedor  
+- contas a pagar e a receber em aberto ou vencidas  
+- produtos comprados mas ainda não estocados  
+- produtos que nunca foram vendidos  
 
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
+Esses relatórios serão usados para decisões estratégicas e auditorias internas.
 
 ---
 
-## UC04 — Consultar Produto
-**Ator(es):** Atendente  
-**Descrição:** Permite localizar produtos para venda ou verificação de estoque.  
-**Pré-condições:** Produto cadastrado no sistema.  
-**Pós-condições:** Informações do produto exibidas.
+## 6. Perfis de Usuários e Permissões
 
-### Fluxo Principal
-1. Atendente seleciona “Consultar Produto”.  
-2. Sistema solicita critério de busca (nome, código, fabricante).  
-3. Atendente insere dados e confirma.  
-4. Sistema exibe os produtos encontrados.
+O sistema será utilizado por diferentes perfis de usuários, cada um com funções específicas:
 
-### Fluxos Alternativos / Exceções
-- **FA01 — Produto não encontrado:** Sistema alerta que produto não existe.
+- **Atendente:** registra vendas, consulta produtos e identifica clientes.  
+- **Farmacêutico:** valida receitas e autoriza vendas controladas.  
+- **Gerente:** cadastra produtos, aprova preços e ajusta estoque.  
+- **Financeiro:** controla contas a pagar/receber e gera demonstrativos.  
+- **Administrador:** administra usuários, permissões e parâmetros gerais.
 
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
+Cada operação possui restrições de acesso conforme a função do usuário.
 
 ---
 
-## UC05 — Registrar Venda
-**Ator(es):** Atendente  
-**Descrição:** Permite registrar vendas de produtos a um cliente, atualizando estoque e emitindo comprovante.  
-**Pré-condições:** Cliente cadastrado; produtos disponíveis em estoque.  
-**Pós-condições:** Venda registrada, estoque atualizado, comprovante emitido.
+## 7. Integração de Processos
 
-### Fluxo Principal
-1. Atendente seleciona “Registrar Venda”.  
-2. Sistema solicita identificação do cliente.  
-3. Atendente adiciona produtos à venda.  
-4. Sistema verifica estoque (<<include>> Atualizar Estoque).  
-5. Sistema calcula total e confirma venda.  
-6. Sistema emite comprovante (<<include>> Emitir Comprovante de Venda).
+Vários processos devem estar integrados, como por exemplo:
 
-### Fluxos Alternativos / Exceções
-- **FA01 — Produto sem estoque:** Sistema alerta e impede inclusão do produto.  
-- **FA02 — Venda a prazo:** Sistema direciona para Registrar Venda a Prazo (<<extend>>).
+- **Venda** → inclui etapas de identificar cliente, consultar produto, verificar estoque, registrar itens e finalizar operação.  
+- **Venda a prazo** → estende a venda comum adicionando o registro em contas a receber.  
+- **Compra** → inclui atualização de estoque e lançamento em contas a pagar.  
+- **Tratamento de exceções** → estoque insuficiente, produto inexistente, cliente não cadastrado etc.
 
-### Relacionamentos
-- **Incluir:** Atualizar Estoque (UC7), Emitir Comprovante de Venda (UC8)  
-- **Estender:** Registrar Venda a Prazo (UC6)
+Essas relações deverão ser modeladas pelos alunos utilizando **<<include>>** e **<<extend>>** quando apropriado.
 
 ---
 
-## UC06 — Registrar Venda a Prazo
-**Ator(es):** Atendente / Financeiro  
-**Descrição:** Registra vendas a prazo, gerando contas a receber automáticas.  
-**Pré-condições:** Venda iniciada; cliente cadastrado.  
-**Pós-condições:** Conta a receber criada; venda registrada.
+## 8. Objetivo do Sistema
 
-### Fluxo Principal
-1. Atendente indica que a venda será a prazo.  
-2. Sistema solicita vencimento e confirma dados do cliente.  
-3. Sistema gera conta a receber (<<include>> Gerar Conta a Receber).  
-4. Sistema confirma venda a prazo.
+A Saúde & Vida espera que o novo sistema:
 
-### Fluxos Alternativos / Exceções
-- **FA01 — Cliente não cadastrado:** Sistema solicita cadastro antes de prosseguir.
-
-### Relacionamentos
-- **Incluir:** Gerar Conta a Receber (UC9)  
-- **Estender:** Registro iniciado por Registrar Venda (UC5)
+- aumente a eficiência do atendimento,  
+- assegure integridade no controle de estoque,  
+- reduza erros manuais,  
+- integre vendas, compras e financeiro,  
+- forneça dados confiáveis para tomada de decisão.
 
 ---
 
-## UC07 — Atualizar Estoque
-**Ator(es):** Sistema  
-**Descrição:** Atualiza estoque automaticamente após venda ou devolução.  
-**Pré-condições:** Venda ou devolução registrada.  
-**Pós-condições:** Estoque refletindo a operação realizada.
+# Entrega do Projeto
 
-### Fluxo Principal
-1. Sistema recebe notificação de venda ou devolução.  
-2. Sistema ajusta a quantidade disponível do produto.  
-3. Sistema alerta se estoque estiver abaixo do mínimo.
+Os alunos deverão:
 
-### Fluxos Alternativos / Exceções
-- **FA01 — Estoque insuficiente:** Sistema impede finalização da venda.
+1. Criar um arquivo **NOMEALUNO_RA.md** contendo toda a modelagem solicitada na avaliação, considerando o template **AVALIACAO.md** que está em /docs.  
+2. Organizar o conteúdo de maneira clara e bem estruturada.  
+3. Enviar o arquivo por meio de **Pull Request (PR)** no repositório da disciplina.
 
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
+# Avaliação
 
----
+- Regras de negócio: mínimo 5.
+- Requisitos funcionais: mínimo 8.
+- Requisitos não funcionais: mínimo 4.
+- Casos de uso: minimo 10, sendo obrigatória a utilização de 3 includes e 3 extends. Demonstrar por meio de diagrama de casos de uso.
+- Documentação de cada caso de uso (conforme template).
+- Diagramas de atividade para cada caso de uso.
 
-## UC08 — Emitir Comprovante de Venda
-**Ator(es):** Sistema  
-**Descrição:** Gera comprovante detalhado da venda para o cliente.  
-**Pré-condições:** Venda registrada.  
-**Pós-condições:** Comprovante emitido e registrado.
 
-### Fluxo Principal
-1. Sistema gera comprovante com cliente, produtos, quantidade e valor.  
-2. Atendente entrega comprovante ao cliente.
-
-### Fluxos Alternativos / Exceções
-- **FA01 — Falha na impressora:** Sistema oferece salvar em PDF.
-
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
-
----
-
-## UC09 — Gerar Conta a Receber
-**Ator(es):** Sistema / Financeiro  
-**Descrição:** Cria registro de contas a receber para vendas a prazo.  
-**Pré-condições:** Venda a prazo iniciada.  
-**Pós-condições:** Conta a receber registrada com status “Aberta”.
-
-### Fluxo Principal
-1. Sistema cria conta com valor, vencimento e cliente.  
-2. Sistema registra status inicial como “Aberta”.
-
-### Fluxos Alternativos / Exceções
-- **FA01 — Dados incompletos do cliente:** Sistema solicita preenchimento antes de criar conta.
-
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Nenhum
-
----
-
-## UC10 — Consultar Histórico de Compras do Cliente
-**Ator(es):** Atendente / Cliente  
-**Descrição:** Permite visualizar todas as compras realizadas por um cliente.  
-**Pré-condições:** Cliente cadastrado.  
-**Pós-condições:** Histórico exibido.
-
-### Fluxo Principal
-1. Atendente ou cliente seleciona “Histórico de Compras”.  
-2. Sistema solicita identificação do cliente.  
-3. Sistema exibe lista de todas as compras com detalhes.
-
-### Fluxos Alternativos / Exceções
-- **FA01 — Cliente sem compras:** Sistema informa que não há histórico disponível.
-
-### Relacionamentos
-- **Incluir:** Nenhum  
-- **Estender:** Consultar Cliente (UC2)
-  <img width="2392" height="694" alt="image" src="https://github.com/user-attachments/assets/c95bdb37-9857-4a5a-9e17-c4cb75935d58" />
