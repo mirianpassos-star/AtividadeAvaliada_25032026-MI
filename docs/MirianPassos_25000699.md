@@ -58,7 +58,8 @@ Este MVP foca no **fluxo crítico de vendas e controle de estoque**. O objetivo 
 
 **Relacionamentos:** - **Include:** Nenhum | **Extend:** Nenhum  
 
----
+<img width="521" height="896" alt="image" src="https://github.com/user-attachments/assets/65b31677-fbef-4d35-951f-91db5e24c910" />
+
 
 ### UC05 — Registrar Venda
 **Ator(es):** Atendente  
