@@ -78,9 +78,7 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 ### UC04 — Localizar Produto
 **Ator:** Atendente | **Descrição:** Consulta de preço e saldo em estoque.  
 
-
-
-
+<img width="413" height="273" alt="image" src="https://github.com/user-attachments/assets/6ac97fed-779d-491b-bb7f-d3eccfd67343" />
 
 
 ### UC05 — Registrar Venda
@@ -123,4 +121,5 @@ Este MVP foca no fluxo crítico de vendas e controle de estoque, garantindo a op
 
 ### UC10 — Ver Histórico de Compras
 **Ator:** Atendente | **Descrição:** Relatório de consumo por cliente.  
-![Atividade UC10]([COLE_AQUI_O_LINK_DA_IMAGEM])
+<img width="675" height="391" alt="image" src="https://github.com/user-attachments/assets/6c3c5f24-a8b2-4e63-8192-85f3cefe8fcf" />
+
